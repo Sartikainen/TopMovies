@@ -59,7 +59,7 @@ public class NetworkUtils {
 
     public static JSONObject getJSONFromNetwork(int sortBy, int page) {
         JSONObject result = null;
-        URL url = buildUrl(sortBy, 1);
+        URL url = buildUrl(sortBy, page);
         try {
             result = new JSONLoadTask().execute(url).get();
         } catch (ExecutionException | InterruptedException e) {

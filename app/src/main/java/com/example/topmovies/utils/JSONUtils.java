@@ -32,7 +32,15 @@ public class JSONUtils {
                 JSONObject objectMovie = jsonArray.getJSONObject(i);
                 int id = objectMovie.getInt(KEY_ID);
                 int voteCount = objectMovie.getInt(KEY_VOTE_COUNT);
-
+                String title = objectMovie.getString(KEY_TITLE);
+                String originalTitle = objectMovie.getString(KEY_ORIGINAL_TITLE);
+                String overview = objectMovie.getString(KEY_OVERVIEW);
+                String releaseDate = objectMovie.getString(KEY_RELEASE_DATE);
+                String posterPath = objectMovie.getString(KEY_POSTER_PATH);
+                String backdropPath = objectMovie.getString(KEY_BACKDROP_PATH);
+                double voteAverage = objectMovie.getDouble(KEY_VOTE_AVERAGE);
+                Movie movie = new Movie(id, voteCount, title, originalTitle, overview, posterPath, backdropPath, voteAverage, releaseDate);
+                result.add(movie);
             }
         } catch (JSONException e) {
             e.printStackTrace();
