@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.topmovies.data.Movie;
 import com.example.topmovies.utils.JSONUtils;
@@ -20,16 +22,19 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+    private MovieAdapter movieAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        JSONObject jsonObject = NetworkUtils.getJSONFromNetwork(NetworkUtils.POPULARITY, 5);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView = findViewById(R.id.rvPosters);
+        movieAdapter = new MovieAdapter();
+        JSONObject jsonObject = NetworkUtils.getJSONFromNetwork(NetworkUtils.POPULARITY, 1);
         ArrayList<Movie> movies = JSONUtils.getMoviesFromJSON(jsonObject);
-        StringBuilder builder = new StringBuilder();
-        for (Movie movie : movies) {
-            builder.append(movie.getTitle()).append("\n");
-        }
-        Log.i("MyResult", builder.toString());
+        movieAdapter.addMovies(movies);
+        recyclerView.setAdapter(movieAdapter);
     }
 }
