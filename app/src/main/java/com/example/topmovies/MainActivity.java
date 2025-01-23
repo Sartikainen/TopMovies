@@ -1,5 +1,6 @@
 package com.example.topmovies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Switch;
@@ -49,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
         switchSort.setChecked(true);
         switchSort.setOnCheckedChangeListener((buttonView, isChecked) -> setMethodOfSort(isChecked));
         switchSort.setChecked(false);
-        movieAdapter.setOnPosterClickListener(position -> Toast.makeText(MainActivity.this, "Clicked" + position, Toast.LENGTH_SHORT).show());
+        movieAdapter.setOnPosterClickListener(position -> {
+            Movie movie = movieAdapter.getMovies().get(position);
+            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+            intent.putExtra("id", movie.getId());
+            startActivity(intent);
+        });
         movieAdapter.setOnReachEndListener(() -> Toast.makeText(MainActivity.this, "End", Toast.LENGTH_SHORT).show());
         LiveData<List<Movie>> moviesFromLiveData = viewModel.getMovies();
         moviesFromLiveData.observe(this, movies -> movieAdapter.setMovies(movies));
@@ -80,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void downloadData(int methodOfSort, int page) {
-        JSONObject jsonObject = NetworkUtils.getJSONFromNetwork(methodOfSort, page);
+        JSONObject jsonObject = NetworkUtils.getJSONFromNetwork(methodOfSort, 1);
         ArrayList<Movie> movies = JSONUtils.getMoviesFromJSON(jsonObject);
         if (movies != null && !movies.isEmpty()) {
             viewModel.deleteAllMovies();
