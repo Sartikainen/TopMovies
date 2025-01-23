@@ -17,7 +17,7 @@ public class Movie {
     private Double voteAverage;
     private String releaseDate;
 
-    public Movie(int id, int voteCount, String title, String originalTitle, String overview, String posterPath, String bigPosterPath,String backdropPath, Double voteAverage, String releaseDate) {
+    public Movie(int id, int voteCount, String title, String originalTitle, String overview, String posterPath, String bigPosterPath, String backdropPath, Double voteAverage, String releaseDate) {
         this.id = id;
         this.voteCount = voteCount;
         this.title = title;
