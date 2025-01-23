@@ -27,7 +27,7 @@
             android:layout_margin="8dp"
             android:text="Название:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivBigPoster" />
+            app:layout_constraintTop_toBottomOf="@+id/ivAddToFavourite" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineCenter"
@@ -44,7 +44,7 @@
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
-            app:layout_constraintTop_toBottomOf="@+id/ivBigPoster" />
+            app:layout_constraintTop_toBottomOf="@+id/ivAddToFavourite" />
 
         <TextView
             android:id="@+id/tvLabelOriginalTitle"
@@ -120,5 +120,15 @@
             android:text="TextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLabelOverview" />
+
+        <ImageView
+            android:id="@+id/ivAddToFavourite"
+            android:layout_width="@dimen/size_of_star"
+            android:layout_height="@dimen/size_of_star"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBigPoster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivBigPoster"
+            app:srcCompat="@drawable/baseline_star_24" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
