@@ -21,6 +21,8 @@ public class NetworkUtils {
 
 
     private static final String BASE_URL = "https://api.themoviedb.org/3/discover/movie";
+    private static final String BASE_URL_VIDEOS = "https://api.themoviedb.org/3/movie/%s/videos";
+    private static final String BASE_URL_REVIEWS = "https://api.themoviedb.org/3/movie/%s/reviews";
 
     private static final String PARAMS_API_KEY = "api_key";
     private static final String PARAMS_LANGUAGE = "language";
@@ -34,6 +36,29 @@ public class NetworkUtils {
 
     public static final int POPULARITY = 0;
     public static final int TOP_RATED = 1;
+
+    private static URL buildURLToReviews(int movieId) {
+        Uri uri = Uri.parse(String.format(BASE_URL_REVIEWS, movieId)).buildUpon()
+                .appendQueryParameter(PARAMS_API_KEY, API_KEY)
+                .build();
+        try {
+            return new URL(uri.toString());
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static URL buildURLToVideos(int movieId) {
+        Uri uri = Uri.parse(String.format(BASE_URL_VIDEOS, movieId)).buildUpon()
+                .appendQueryParameter(PARAMS_API_KEY, API_KEY)
+                .appendQueryParameter(PARAMS_LANGUAGE, LANGUAGE_VALUE)
+                .build();
+        try {
+            return new URL(uri.toString());
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private static URL buildUrl(int sortBy, int page) {
         URL result = null;
@@ -53,6 +78,28 @@ public class NetworkUtils {
             result = new URL(uri.toString());
         } catch (MalformedURLException e) {
             Log.e("buildUrl", Objects.requireNonNull(e.getMessage()));
+        }
+        return result;
+    }
+
+    public static JSONObject getJSONForVideos(int movieId) {
+        JSONObject result = null;
+        URL url = buildURLToVideos(movieId);
+        try {
+            result = new JSONLoadTask().execute(url).get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+
+    public static JSONObject getJSONForReviews(int movieId) {
+        JSONObject result = null;
+        URL url = buildURLToReviews(movieId);
+        try {
+            result = new JSONLoadTask().execute(url).get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
         return result;
     }

@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.topmovies.adapters.MovieAdapter;
 import com.example.topmovies.data.MainViewModel;
 import com.example.topmovies.data.Movie;
 import com.example.topmovies.utils.JSONUtils;
