@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="size_of_star">50dp</dimen>
+    <dimen name="big_margin">16dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="size_of_small_star">40dp</dimen>
+    <dimen name="size_of_trailer">60dp</dimen>
+    <dimen name="size_of_sort_text">16sp</dimen>
+    <dimen name="size_of_progress_bar">42dp</dimen>
+    <dimen name="very_small_margin">4dp</dimen>
 </resources>

@@ -3,6 +3,7 @@ package com.example.topmovies;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -50,6 +51,13 @@ public class FavouriteActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private int getColumnCount() {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int width = (int) (displayMetrics.widthPixels / displayMetrics.density);
+        return width / 185 > 2 ? width / 185 : 2;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +65,7 @@ public class FavouriteActivity extends AppCompatActivity {
         rvFavouriteMovies = findViewById(R.id.rvFavouriteMovies);
         adapter = new MovieAdapter();
         rvFavouriteMovies.setAdapter(adapter);
-        rvFavouriteMovies.setLayoutManager(new GridLayoutManager(this, 2));
+        rvFavouriteMovies.setLayoutManager(new GridLayoutManager(this, getColumnCount()));
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         LiveData<List<FavouriteMovie>> favouriteMovies = viewModel.getFavouriteMovies();
         favouriteMovies.observe(this, new Observer<List<FavouriteMovie>>() {

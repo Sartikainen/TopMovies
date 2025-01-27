@@ -8,4 +8,11 @@
     <string name="item_main">Главная</string>
     <string name="item_favourite">Избранное</string>
     <string name="launch_trailer">Запустить Трейлер</string>
+    <string name="big_poster_of_movie">Большой постер</string>
+    <string name="name_of_movie">Название:</string>
+    <string name="name_of_original_movie">Оригинальное название:</string>
+    <string name="rating_of_movie">Рейтинг:</string>
+    <string name="date_of_movie_release">Дата релиза:</string>
+    <string name="overview_movie">Описание:</string>
+    <string name="favourite_star">favourite_star</string>
 </resources>

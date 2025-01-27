@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DetailActivity">
+
+        <ImageView
+            android:id="@+id/ivBigPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/big_poster_of_movie"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    
+        <ImageView
+            android:id="@+id/ivAddToFavourite"
+            android:layout_width="@dimen/size_of_small_star"
+            android:layout_height="@dimen/size_of_small_star"
+            android:layout_marginEnd="@dimen/big_margin"
+            android:layout_marginTop="@dimen/big_margin"
+            android:contentDescription="@string/favourite_star"
+            app:layout_constraintEnd_toEndOf="@id/ivBigPoster"
+            app:layout_constraintTop_toTopOf="@id/ivBigPoster"
+            app:srcCompat="@drawable/baseline_star_24" />
+
+    <ScrollView
+        android:id="@+id/scrollViewInfo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivBigPoster">
+
+        <include
+            layout="@layout/movie_info"
+            android:id="@+id/movieInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </include>
+
+    </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
