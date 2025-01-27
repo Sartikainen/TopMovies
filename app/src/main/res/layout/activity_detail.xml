@@ -133,6 +133,7 @@
         
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvTrailers"
+            android:nestedScrollingEnabled="false"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -141,6 +142,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvReviews"
+            android:nestedScrollingEnabled="false"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
