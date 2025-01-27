@@ -1,5 +1,6 @@
 package com.example.topmovies.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,7 @@ public class TrailerAdapter extends RecyclerView.Adapter<TrailerAdapter.TrailerV
             });
         }
     }
+    @SuppressLint("NotifyDataSetChanged")
     public void setTrailers(ArrayList<Trailer> trailers) {
         this.trailers = trailers;
         notifyDataSetChanged();

@@ -1,8 +1,14 @@
 package com.example.topmovies.utils;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.loader.content.AsyncTaskLoader;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,16 +34,18 @@ public class NetworkUtils {
     private static final String PARAMS_LANGUAGE = "language";
     private static final String PARAMS_PAGE = "page";
     private static final String PARAMS_SORT_BY = "sort_by";
+    private static final String PARAMS_MIN_VOTE_COUNT = "vote_count.gte";
 
     private static final String API_KEY = "8d4e793668b8b4c443e4d2849f7f06f3";
     private static final String LANGUAGE_VALUE = "ru-RU";
     private static final String SORT_BY_POPULARITY = "popularity.desc";
     private static final String SORT_BY_TOP_RATED = "vote_average.desc";
+    private static final String PARAMS_MIN_VOTE_COUNT_VALUE = "1000";
 
     public static final int POPULARITY = 0;
     public static final int TOP_RATED = 1;
 
-    private static URL buildURLToReviews(int movieId) {
+    public static URL buildURLToReviews(int movieId) {
         Uri uri = Uri.parse(String.format(BASE_URL_REVIEWS, movieId)).buildUpon()
                 .appendQueryParameter(PARAMS_API_KEY, API_KEY)
                 .build();
@@ -48,7 +56,7 @@ public class NetworkUtils {
         }
     }
 
-    private static URL buildURLToVideos(int movieId) {
+    public static URL buildURLToVideos(int movieId) {
         Uri uri = Uri.parse(String.format(BASE_URL_VIDEOS, movieId)).buildUpon()
                 .appendQueryParameter(PARAMS_API_KEY, API_KEY)
                 .appendQueryParameter(PARAMS_LANGUAGE, LANGUAGE_VALUE)
@@ -60,7 +68,7 @@ public class NetworkUtils {
         }
     }
 
-    private static URL buildUrl(int sortBy, int page) {
+    public static URL buildUrl(int sortBy, int page) {
         URL result = null;
         String methodOfSort;
         if (sortBy == POPULARITY) {
@@ -72,6 +80,7 @@ public class NetworkUtils {
                 .appendQueryParameter(PARAMS_API_KEY, API_KEY)
                 .appendQueryParameter(PARAMS_LANGUAGE, LANGUAGE_VALUE)
                 .appendQueryParameter(PARAMS_SORT_BY, methodOfSort)
+                .appendQueryParameter(PARAMS_MIN_VOTE_COUNT, PARAMS_MIN_VOTE_COUNT_VALUE)
                 .appendQueryParameter(PARAMS_PAGE, Integer.toString(page))
                 .build();
         try {
@@ -115,6 +124,61 @@ public class NetworkUtils {
         return result;
     }
 
+    public static class JSONLoader extends AsyncTaskLoader<JSONObject> {
+
+        private Bundle bundle;
+
+        public JSONLoader(@NonNull Context context, Bundle bundle) {
+            super(context);
+            this.bundle = bundle;
+        }
+
+        @Override
+        protected void onStartLoading() {
+            super.onStartLoading();
+            forceLoad();
+        }
+
+        @Nullable
+        @Override
+        public JSONObject loadInBackground() {
+            if (bundle == null) {
+                return null;
+            }
+            String urlAsString = bundle.getString("url");
+            URL url = null;
+            try {
+                url = new URL(urlAsString);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+            JSONObject result = null;
+            if (url == null)  {
+                return null;
+            }
+            HttpURLConnection connection = null;
+            try {
+                connection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = connection.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader reader = new BufferedReader(inputStreamReader);
+                StringBuilder builder = new StringBuilder();
+                String line = reader.readLine();
+                while (line != null) {
+                    builder.append(line);
+                    line = reader.readLine();
+                }
+                result = new JSONObject(builder.toString());
+            } catch (IOException | JSONException e) {
+                Log.e("JSONLoadTask", Objects.requireNonNull(e.getMessage()));
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
+            return result;
+        }
+    }
 
     private static class JSONLoadTask extends AsyncTask<URL, Void, JSONObject> {
         @Override
@@ -131,7 +195,7 @@ public class NetworkUtils {
                 BufferedReader reader = new BufferedReader(inputStreamReader);
                 StringBuilder builder = new StringBuilder();
                 String line = reader.readLine();
-                while(line != null) {
+                while (line != null) {
                     builder.append(line);
                     line = reader.readLine();
                 }

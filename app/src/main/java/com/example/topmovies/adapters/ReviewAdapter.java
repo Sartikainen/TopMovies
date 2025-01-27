@@ -1,5 +1,6 @@
 package com.example.topmovies.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         return reviews.size();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setReviews(ArrayList<Review> reviews) {
         this.reviews = reviews;
         notifyDataSetChanged();
