@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         switchSort.setChecked(false);
         movieAdapter.setOnPosterClickListener(position -> {
             Movie movie = movieAdapter.getMovies().get(position);
-            Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+            Intent intent = new Intent(this, DetailActivity.class);
             intent.putExtra("id", movie.getId());
             startActivity(intent);
         });

@@ -82,7 +82,7 @@ public class FavouriteActivity extends AppCompatActivity {
         });
         adapter.setOnPosterClickListener(position -> {
             Movie movie = adapter.getMovies().get(position);
-            Intent intent = new Intent(FavouriteActivity.this, DetailActivity.class);
+            Intent intent = new Intent(this, DetailActivity.class);
             intent.putExtra("id", movie.getId());
             startActivity(intent);
         });
