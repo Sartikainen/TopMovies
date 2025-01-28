@@ -104,7 +104,7 @@ public class DetailActivity extends AppCompatActivity {
         }
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         movie = viewModel.getMovieById(id);
-        Picasso.get().load(movie.getBigPosterPath()).placeholder(R.drawable.placeholder_item).into(ivBigPoster);
+        Picasso.get().load(movie.getBigPosterPath()).into(ivBigPoster);
         tvTitle.setText(movie.getTitle());
         tvOriginalTitle.setText(movie.getOriginalTitle());
         tvRating.setText(Double.toString(movie.getVoteAverage()));

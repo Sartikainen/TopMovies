@@ -44,9 +44,11 @@ public class FavouriteActivity extends AppCompatActivity {
         if (id == R.id.itemMain) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
         } else if (id == R.id.itemFavourite) {
             Intent intentToFavourite = new Intent(this, FavouriteActivity.class);
             startActivity(intentToFavourite);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
