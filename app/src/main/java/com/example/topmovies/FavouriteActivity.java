@@ -57,7 +57,7 @@ public class FavouriteActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = (int) (displayMetrics.widthPixels / displayMetrics.density);
-        return width / 185 > 2 ? width / 185 : 2;
+        return width / 185 > 2 ? width / 185 : 3;
     }
 
     @Override
