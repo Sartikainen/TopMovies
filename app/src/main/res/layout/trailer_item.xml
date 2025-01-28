@@ -28,6 +28,7 @@
             android:id="@+id/tvNameOfVideo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:layout_margin="@dimen/small_margin"
             app:layout_constraintStart_toEndOf="@id/ivPlay"
             app:layout_constraintTop_toTopOf="parent"

@@ -15,11 +15,10 @@
     </View>
 
     <TextView
+        style="@style/LabelStyle"
         android:id="@+id/tvLabelTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
-        android:layout_margin="@dimen/small_margin"
         android:text="@string/name_of_movie"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,6 +31,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <TextView
+        style="@style/ValueStyle"
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -42,61 +42,55 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        style="@style/LabelStyle"
         android:id="@+id/tvLabelOriginalTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
-        android:layout_margin="@dimen/small_margin"
         android:text="@string/name_of_original_movie"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <TextView
+        style="@style/ValueStyle"
         android:id="@+id/tvOriginalTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_margin="@dimen/small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <TextView
+        style="@style/LabelStyle"
         android:id="@+id/tvLabelRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
-        android:layout_margin="@dimen/small_margin"
         android:text="@string/rating_of_movie"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvOriginalTitle" />
 
     <TextView
+        style="@style/ValueStyle"
         android:id="@+id/tvRating"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_margin="@dimen/small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvOriginalTitle" />
 
     <TextView
+        style="@style/LabelStyle"
         android:id="@+id/tvLabelRelease"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
-        android:layout_margin="@dimen/small_margin"
         android:text="@string/date_of_movie_release"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRating" />
 
     <TextView
+        style="@style/ValueStyle"
         android:id="@+id/tvRelease"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_margin="@dimen/small_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
         app:layout_constraintTop_toBottomOf="@+id/tvRating" />
@@ -112,21 +106,19 @@
     </View>
 
     <TextView
+        style="@style/LabelStyle"
         android:id="@+id/tvLabelOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
-        android:layout_margin="@dimen/small_margin"
         android:text="@string/overview_movie"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRelease" />
 
     <TextView
+        style="@style/ValueStyle"
         android:id="@+id/tvOverview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_margin="@dimen/small_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLabelOverview" />
 

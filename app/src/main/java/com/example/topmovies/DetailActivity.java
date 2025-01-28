@@ -33,6 +33,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -55,6 +56,8 @@ public class DetailActivity extends AppCompatActivity {
     private FavouriteMovie favouriteMovie;
 
     private MainViewModel viewModel;
+
+    private static String language;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -83,6 +86,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        language = Locale.getDefault().getLanguage();
         scrollViewInfo = findViewById(R.id.scrollViewInfo);
         ivBigPoster = findViewById(R.id.ivBigPoster);
         tvTitle = findViewById(R.id.tvTitle);
@@ -100,7 +104,7 @@ public class DetailActivity extends AppCompatActivity {
         }
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         movie = viewModel.getMovieById(id);
-        Picasso.get().load(movie.getBigPosterPath()).into(ivBigPoster);
+        Picasso.get().load(movie.getBigPosterPath()).placeholder(R.drawable.placeholder_item).into(ivBigPoster);
         tvTitle.setText(movie.getTitle());
         tvOriginalTitle.setText(movie.getOriginalTitle());
         tvRating.setText(Double.toString(movie.getVoteAverage()));
@@ -119,8 +123,8 @@ public class DetailActivity extends AppCompatActivity {
         rvTrailers.setLayoutManager(new LinearLayoutManager(this));
         rvReviews.setAdapter(reviewAdapter);
         rvTrailers.setAdapter(trailerAdapter);
-        JSONObject jsonObjectTrailers = NetworkUtils.getJSONForVideos(movie.getId());
-        JSONObject jsonObjectReviews = NetworkUtils.getJSONForReviews(movie.getId());
+        JSONObject jsonObjectTrailers = NetworkUtils.getJSONForVideos(movie.getId(), language);
+        JSONObject jsonObjectReviews = NetworkUtils.getJSONForReviews(movie.getId(), language);
         ArrayList<Trailer> trailers = JSONUtils.getTrailersFromJSON(jsonObjectTrailers);
         ArrayList<Review> reviews = JSONUtils.getReviewsFromJSON(jsonObjectReviews);
         reviewAdapter.setReviews(reviews);
