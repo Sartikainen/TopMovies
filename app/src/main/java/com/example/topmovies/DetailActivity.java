@@ -104,6 +104,9 @@ public class DetailActivity extends AppCompatActivity {
         }
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
         movie = viewModel.getMovieById(id);
+        if (movie == null) {
+            movie = viewModel.getFavouriteMovieById(id);
+        }
         Picasso.get().load(movie.getBigPosterPath()).into(ivBigPoster);
         tvTitle.setText(movie.getTitle());
         tvOriginalTitle.setText(movie.getOriginalTitle());
